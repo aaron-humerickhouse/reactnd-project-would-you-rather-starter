@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 import NavComponent from './components/nav'
 import HomeComponent from './components/home'
 import NewQuestionComponent from './components/newQuestion'
-import LeaderBoardComponent from './components/leaderBoard'
+import LeaderBoardComponent from './components/leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
 
