@@ -7,19 +7,14 @@ import LoginComponent from './components/login'
 import Container from 'react-bootstrap/Container'
 import NavComponent from './components/nav'
 import HomeComponent from './components/home'
-// import { BrowserRouter as Router, Route } from 'react-router-dom'
+import NewQuestionComponent from './components/newQuestion'
+import LeaderBoardComponent from './components/leaderBoard'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
 
 // import Main from 'react-bootstrap/Main'
 
 class App extends React.Component{
-  constructor(props) {
-    super(props)
-    this.state = {
-      loggedIn: false //(Math.floor(Math.random()*2) === 0)
-    }
-  }
-
   isLoggedIn = () => {
     const { users, authedUser } = this.props
     return users[authedUser] !== undefined
@@ -37,20 +32,27 @@ class App extends React.Component{
   }
   render() {
     return (
-      <Fragment>
-        <LoadingBar />
-        <Container className="App">
-          {
-            this.isLoggedIn() && <div>
-              <NavComponent />
-              <HomeComponent />
-            </div>
-          }
-          {
-            !this.isLoggedIn() &&<LoginComponent />
-          }
-        </Container>
-      </Fragment>
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <Container className="App">
+            {
+              this.isLoggedIn() && <div>
+                <NavComponent />
+                <div>
+                  <Route path='/' exact component={HomeComponent} />
+                  <Route path='/dashboard' component={HomeComponent} />
+                  <Route path='/questions/new' component={NewQuestionComponent} />
+                  <Route path='/leaderboard' component={LeaderBoardComponent} />
+                </div>
+              </div>
+            }
+            {
+              !this.isLoggedIn() &&<LoginComponent />
+            }
+          </Container>
+        </Fragment>
+      </Router>
     );
   }
 }

@@ -1,36 +1,76 @@
 import React from 'react'
 import Nav from 'react-bootstrap/Nav'
+import NavLink from 'react-bootstrap/NavLink'
+import Navbar from 'react-bootstrap/Navbar'
 import { connect } from 'react-redux'
+import { setAuthedUser } from './../actions/authedUser'
+import { LinkContainer } from "react-router-bootstrap"
+import { Link, withRouter } from 'react-router-dom'
 
 class NavComponent extends React.Component {
+  handleLogout = (event) => {
+    event.preventDefault()
+    const { dispatch } = this.props
+    dispatch(setAuthedUser(null))
+  }
+  componentDidMount = () => {
+    console.log("location: ", this.props.location.pathname)
+  }
+
   render() {
-    const { authedUser } = this.props
+    const { authedUser, users } = this.props
     return(
-      <Nav
-        variant="tabs"
-        activeKey="/"
-        onSelect={selectedKey => alert(`selected ${selectedKey}`)}
-      >
-        <Nav.Item>
-          <Nav.Link href="/">Dashboard</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/questions/new">New Question</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/leader-board">Leader Board</Nav.Link>
-        </Nav.Item>
-        Welcome, {authedUser}!
-      </Nav>
+      <div>
+        <Navbar collapseOnSelect expand="md">
+          <Link to="/">
+            <Navbar.Brand>
+              Would You Rather
+            </Navbar.Brand>
+          </Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav
+              variant="tabs"
+              activeKey={this.props.location.pathname}
+            >
+              <LinkContainer to="/dashboard">
+                <NavLink eventKey="/dashboard">Dashboard</NavLink>
+              </LinkContainer>
+              <LinkContainer to="/questions/new">
+                <NavLink eventKey="/questions/new">New Question</NavLink>
+              </LinkContainer>
+              <LinkContainer to="/leaderboard">
+                <NavLink eventKey="/leaderboard">Leaderboard</NavLink>
+              </LinkContainer>
+            </Nav>
+            <hr />
+            <Nav>
+              <Navbar.Brand>
+                <img
+                  src={users[authedUser].avatarURL}
+                  width="30"
+                  height="30"
+                  alt={`${authedUser} avatar`}
+                />
+              </Navbar.Brand>
+              <Navbar.Text>
+                { ` Welcome, ${authedUser}!`}
+              </Navbar.Text>
+              <NavLink href="#" onClick={this.handleLogout}>Logout</NavLink>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
     )
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser, users }) {
   return {
-    authedUser: authedUser
+    authedUser: authedUser,
+    users: users
   }
 }
 
 
-export default connect(mapStateToProps)(NavComponent)
+export default withRouter(connect(mapStateToProps)(NavComponent))

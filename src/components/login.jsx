@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
 import { setAuthedUser } from './../actions/authedUser'
+import { withRouter } from 'react-router-dom'
+
 
 class LoginComponent extends React.Component {
   state = {
@@ -16,6 +18,7 @@ class LoginComponent extends React.Component {
     event.preventDefault()
     const { dispatch } = this.props
     dispatch(setAuthedUser(this.state.selectedUser))
+    this.props.history.push('/dashboard')
   }
 
   handleChange = (event) => {
@@ -29,7 +32,9 @@ class LoginComponent extends React.Component {
   render() {
     const {users} = this.props
     return (
-      <Row>
+      <Row style={{
+        paddingTop: "2em"
+      }}>
         <Col sm={3}></Col>
         <Col sm={6}>
           <Card>
@@ -37,8 +42,8 @@ class LoginComponent extends React.Component {
             <Card.Body>
               <Form onSubmit={this.handleLogin}>
                   <Form.Group as={Row} controlId="userInput">
-                    <Form.Label column sm={2}>User</Form.Label>
-                    <Col sm={10}>
+                    <Form.Label column md={3} sm={12}>User</Form.Label>
+                    <Col md={9} sm={12}>
                       <Form.Control as="select" onChange={this.handleChange}>
                         <option>Choose a User</option>
                         {
@@ -66,4 +71,4 @@ function mapStateToProps({users}) {
   }
 }
 
-export default connect(mapStateToProps)(LoginComponent)
+export default withRouter(connect(mapStateToProps)(LoginComponent))
