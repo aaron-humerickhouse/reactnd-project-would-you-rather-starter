@@ -23,12 +23,16 @@ class App extends React.Component{
   componentDidMount() {
     this.props.dispatch(handleInitialData())
 
-    const link = document.createElement("link");
+    const bootstrap = document.createElement("link");
+    bootstrap.href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+    bootstrap.rel = 'stylesheet';
 
-    link.href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
-    link.rel = 'stylesheet';
+    const fontAwesome = document.createElement("link");
+    fontAwesome.href = "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
+    fontAwesome.rel = 'stylesheet';
 
-    document.head.appendChild(link);
+    document.head.appendChild(bootstrap);
+    document.head.appendChild(fontAwesome);
   }
   render() {
     return (
