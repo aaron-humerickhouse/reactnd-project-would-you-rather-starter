@@ -8,7 +8,7 @@ class LeaderBoardComponent extends React.Component {
 
     return (
       <div>
-      <h2>Leader Board</h2>
+      <h2>Leaderboard</h2>
         {
           leaders.map((leader, index) =>
             <LeaderComponent key={leader.name} rank={index} leader={leader} />

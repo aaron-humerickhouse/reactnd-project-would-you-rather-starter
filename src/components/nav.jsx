@@ -45,16 +45,14 @@ class NavComponent extends React.Component {
             </Nav>
             <hr />
             <Nav>
-              <Navbar.Brand>
-                <img
+              <Navbar.Text>
+              <img
                   src={users[authedUser].avatarURL}
                   width="30"
                   height="30"
                   alt={`${authedUser} avatar`}
                   className="circle"
                 />
-              </Navbar.Brand>
-              <Navbar.Text>
                 { ` Welcome, ${authedUser}!`}
               </Navbar.Text>
               <NavLink href="#" onClick={this.handleLogout}>Logout</NavLink>

@@ -8,7 +8,6 @@ class QuestionListComponent extends React.Component {
     console.log(questions)
     return(
       <div>
-        <p>Switcher</p>
         {
           questions.map(question =>
             <QuestionComponent key={question} id={question} />
