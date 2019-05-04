@@ -19,6 +19,7 @@ class QuestionListComponent extends React.Component {
 }
 
 function mapStateToProps({questions}) {
+
   return {
     questions: Object.keys(questions).sort()
   }

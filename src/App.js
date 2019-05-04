@@ -7,7 +7,7 @@ import LoginComponent from './components/login'
 import Container from 'react-bootstrap/Container'
 import NavComponent from './components/nav'
 import HomeComponent from './components/dashboard'
-import NewQuestionComponent from './components/newQuestion'
+import AddQuestionComponent from './components/addQuestion'
 import LeaderBoardComponent from './components/leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
@@ -46,7 +46,7 @@ class App extends React.Component{
                 <div>
                   <Route path='/' exact component={HomeComponent} />
                   <Route path='/dashboard' component={HomeComponent} />
-                  <Route path='/questions/new' component={NewQuestionComponent} />
+                  <Route path='/add' component={AddQuestionComponent} />
                   <Route path='/leaderboard' component={LeaderBoardComponent} />
                 </div>
               </div>

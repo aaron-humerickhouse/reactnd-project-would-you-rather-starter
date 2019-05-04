@@ -36,8 +36,8 @@ class NavComponent extends React.Component {
               <LinkContainer to="/dashboard">
                 <NavLink eventKey="/dashboard">Dashboard</NavLink>
               </LinkContainer>
-              <LinkContainer to="/questions/new">
-                <NavLink eventKey="/questions/new">New Question</NavLink>
+              <LinkContainer to="/add">
+                <NavLink eventKey="/add">Add Question</NavLink>
               </LinkContainer>
               <LinkContainer to="/leaderboard">
                 <NavLink eventKey="/leaderboard">Leaderboard</NavLink>
