@@ -17,7 +17,7 @@ class LoginComponent extends React.Component {
   handleLogin = (event) => {
     event.preventDefault()
     const { dispatch } = this.props
-    dispatch(setAuthedUser(this.state.selectedUser))
+    dispatch(setAuthedUser(this.state.selectedUser)) //TODO: change to handle and set local storage to keep authedUser
     this.props.history.push('/dashboard')
   }
 
@@ -38,7 +38,11 @@ class LoginComponent extends React.Component {
         <Col sm={3}></Col>
         <Col sm={6}>
           <Card>
-            <Card.Header>Login</Card.Header>
+            <Card.Header>
+              <Card.Title>
+                Login
+              </Card.Title>
+            </Card.Header>
             <Card.Body>
               <Form onSubmit={this.handleLogin}>
                   <Form.Group as={Row} controlId="userInput">

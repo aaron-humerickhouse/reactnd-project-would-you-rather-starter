@@ -6,7 +6,7 @@ import './App.css';
 import LoginComponent from './components/login'
 import Container from 'react-bootstrap/Container'
 import NavComponent from './components/nav'
-import HomeComponent from './components/home'
+import HomeComponent from './components/dashboard'
 import NewQuestionComponent from './components/newQuestion'
 import LeaderBoardComponent from './components/leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'

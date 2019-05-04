@@ -51,6 +51,7 @@ class NavComponent extends React.Component {
                   width="30"
                   height="30"
                   alt={`${authedUser} avatar`}
+                  className="circle"
                 />
               </Navbar.Brand>
               <Navbar.Text>

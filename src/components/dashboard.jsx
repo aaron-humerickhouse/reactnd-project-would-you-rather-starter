@@ -1,9 +1,13 @@
 import React from 'react'
+import QuestionListComponent from './questionList'
 
 class HomeComponent extends React.Component {
   render() {
     return (
-      <h2>Dashboard</h2>
+      <div>
+        <h2>Dashboard</h2>
+        <QuestionListComponent />
+      </div>
     )
   }
 }

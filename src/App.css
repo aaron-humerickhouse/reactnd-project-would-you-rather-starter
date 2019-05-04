@@ -2,13 +2,28 @@
   text-align: center;
 }
 
-nav img {
-  width: 30px;
-  height: 30px;
+img.circle {
   border-radius: 50%;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .nav-tabs > a.nav-link.active {
   background-color: rgba(0,0,0,0.03);
   border-radius: 0%;
+}
+
+.question {
+  margin: 2rem;
+}
+
+.column-divider {
+  border-right: 1px solid rgba(0,0,0,0.125);
 }
