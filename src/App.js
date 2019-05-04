@@ -62,7 +62,6 @@ class App extends React.Component{
 }
 
 function mapStateToProps ({ authedUser, questions, users }) {
-  console.log("in mapStateTo Props")
   return {
     loading: questions === null && users === null,
     authedUser: authedUser,

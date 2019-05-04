@@ -13,9 +13,6 @@ class NavComponent extends React.Component {
     const { dispatch } = this.props
     dispatch(setAuthedUser(null))
   }
-  componentDidMount = () => {
-    console.log("location: ", this.props.location.pathname)
-  }
 
   render() {
     const { authedUser, users } = this.props

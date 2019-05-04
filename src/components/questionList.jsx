@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 class QuestionListComponent extends React.Component {
   render() {
     const { questions } = this.props
-    console.log(questions)
+
     return(
       <div>
         {
@@ -18,10 +18,13 @@ class QuestionListComponent extends React.Component {
   }
 }
 
-function mapStateToProps({questions}) {
+function mapStateToProps({questions, users, authedUser}, {showUnanswered}) {
+
+  const answeredQuestions = Object.keys(users[authedUser]['answers'])
+  const unansweredQuestions = Object.keys(questions).filter(question => !answeredQuestions.includes(question))
 
   return {
-    questions: Object.keys(questions).sort()
+    questions: showUnanswered ? unansweredQuestions.sort() : answeredQuestions.sort()
   }
 }
 
