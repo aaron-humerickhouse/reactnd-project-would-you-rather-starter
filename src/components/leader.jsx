@@ -32,7 +32,7 @@ class LeaderComponent extends React.Component {
                 <span className="ribbon-icon" style={{
                     color: this.trophyColor(rank)
                 }}>
-                  <i class="fas fa-trophy"/>
+                  <i className="fas fa-trophy"/>
                 </span>
               </div>
             </div>

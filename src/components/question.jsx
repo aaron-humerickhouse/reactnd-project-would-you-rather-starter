@@ -3,14 +3,22 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { connect } from 'react-redux'
-import OptionComponent from './option'
+import { withRouter } from 'react-router-dom'
+import UnansweredBodyComponent from './unansweredBody';
+import AnsweredBodyComponent from './answeredBody';
 
 class QuestionComponent extends React.Component {
+  handleNavigation = (event) => {
+    event.preventDefault()
+    const { question } = this.props
+    this.props.history.push(`/question/${question.id}`)
+  }
+
   render() {
-    const {avatarURL, authorName, question} = this.props
+    const { avatarURL, authorName, question, showUnanswered } = this.props
 
     return(
-      <Card className="question">
+      <Card className="question" onClick={this.handleNavigation}>
         <Card.Header>
           <Card.Title>
           Asked by {authorName}
@@ -24,9 +32,8 @@ class QuestionComponent extends React.Component {
               </Row>
             </Col>
             <Col xs={8}>
-              <h3>Would you rather...</h3>
-              <OptionComponent option={question.optionOne} />
-              <OptionComponent option={question.optionTwo} />
+              { showUnanswered && <UnansweredBodyComponent question={question}/>}
+              { !showUnanswered && <AnsweredBodyComponent question={question}/>}
             </Col>
           </Row>
         </Card.Body>
@@ -45,4 +52,4 @@ function mapStateToProps ({authedUser, users, questions}, { id }) {
   }
 }
 
-export default connect(mapStateToProps)(QuestionComponent)
+export default withRouter(connect(mapStateToProps)(QuestionComponent))

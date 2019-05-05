@@ -109,3 +109,12 @@
 .navbar {
   margin-bottom: 1em;
 }
+
+.answered-option {
+  position: relative;
+}
+.answered-option .voted {
+  position: absolute;
+  top: -30px;
+  right: -40px;
+}
