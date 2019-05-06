@@ -6,19 +6,16 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import UnansweredBodyComponent from './unansweredBody';
 import AnsweredBodyComponent from './answeredBody';
+import UnansweredPollBodyComponent from './unansweredPollBody';
 
 class QuestionComponent extends React.Component {
-  handleNavigation = (event) => {
-    event.preventDefault()
-    const { question } = this.props
-    this.props.history.push(`/question/${question.id}`)
-  }
+
 
   render() {
-    const { avatarURL, authorName, question, showUnanswered } = this.props
+    const { avatarURL, authorName, question, showUnanswered, isPoll } = this.props
 
     return(
-      <Card className="question" onClick={this.handleNavigation}>
+      <Card className="question">
         <Card.Header>
           <Card.Title>
           Asked by {authorName}
@@ -32,8 +29,9 @@ class QuestionComponent extends React.Component {
               </Row>
             </Col>
             <Col xs={8}>
-              { showUnanswered && <UnansweredBodyComponent question={question}/>}
-              { !showUnanswered && <AnsweredBodyComponent question={question}/>}
+              { showUnanswered && !isPoll && <UnansweredBodyComponent question={question}/>}
+              { !showUnanswered && !isPoll && <AnsweredBodyComponent question={question}/>}
+              {isPoll && <UnansweredPollBodyComponent question={question}/>}
             </Col>
           </Row>
         </Card.Body>
@@ -41,7 +39,9 @@ class QuestionComponent extends React.Component {
     )
   }
 }
-function mapStateToProps ({authedUser, users, questions}, { id }) {
+function mapStateToProps ({authedUser, users, questions}, props) {
+  const id = props.id || props.location.pathname.split('/').slice(-1)
+
   const question = questions[id]
   const author = users[question['author']]
   return {

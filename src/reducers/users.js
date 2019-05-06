@@ -1,4 +1,4 @@
-import { GET_USERS } from '../actions/users'
+import { GET_USERS, ADD_ANSWER } from '../actions/users'
 
 export default function users (state = {}, action) {
   switch(action.type) {
@@ -7,6 +7,20 @@ export default function users (state = {}, action) {
         ...state,
         ...action.users
       }
+    case ADD_ANSWER: {
+      const {authedUser, question, option} = action
+      const user = state[authedUser]
+
+      return {
+        ...state,
+        [user.id]: {
+          ...user,
+          answers: {
+            ...user['answers'],
+            [question.id]: option
+          }
+        }
+      }}
     default :
       return state
   }

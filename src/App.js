@@ -11,6 +11,7 @@ import AddQuestionComponent from './components/addQuestion'
 import LeaderBoardComponent from './components/leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
+import QuestionComponent from './components/question'
 
 // import Main from 'react-bootstrap/Main'
 
@@ -48,6 +49,7 @@ class App extends React.Component{
                   <Route path='/dashboard' component={HomeComponent} />
                   <Route path='/add' component={AddQuestionComponent} />
                   <Route path='/leaderboard' component={LeaderBoardComponent} />
+                  <Route path='/question/:id' component={() => <QuestionComponent isPoll={true} /> } />
                 </div>
               </div>
             }

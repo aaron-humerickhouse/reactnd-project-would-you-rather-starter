@@ -2,7 +2,7 @@ import React from 'react'
 import QuestionListComponent from './questionList'
 import Switcher from './switcher'
 
-class HomeComponent extends React.Component {
+class DashboardComponent extends React.Component {
   state = {
     showUnanswered: true
   }
@@ -25,4 +25,4 @@ class HomeComponent extends React.Component {
   }
 }
 
-export default HomeComponent
+export default DashboardComponent
