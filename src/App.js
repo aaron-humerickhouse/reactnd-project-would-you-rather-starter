@@ -12,8 +12,8 @@ import LeaderBoardComponent from './components/leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
 import QuestionComponent from './components/question'
+import { handleSetAuthedUser } from './actions/authedUser';
 
-// import Main from 'react-bootstrap/Main'
 
 class App extends React.Component{
   isLoggedIn = () => {
@@ -22,8 +22,6 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
-
     const bootstrap = document.createElement("link");
     bootstrap.href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
     bootstrap.rel = 'stylesheet';
@@ -34,6 +32,17 @@ class App extends React.Component{
 
     document.head.appendChild(bootstrap);
     document.head.appendChild(fontAwesome);
+
+    this.props.dispatch(handleInitialData())
+
+    const { authedUser, dispatch } = this.props
+
+    if(!authedUser) {
+      const storedUser = localStorage.getItem('authedUser')
+      if(!!storedUser) {
+        dispatch(handleSetAuthedUser(storedUser))
+      }
+    }
   }
   render() {
     const { loading } = this.props
@@ -67,7 +76,7 @@ class App extends React.Component{
   }
 }
 
-function mapStateToProps({ authedUser, questions, users, payload }) {
+function mapStateToProps({ authedUser, questions, users }) {
   return {
     loading: !Object.keys(questions).length || !Object.keys(users).length,
     authedUser: authedUser,

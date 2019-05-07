@@ -2,7 +2,7 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { connect } from 'react-redux'
-import { setAuthedUser } from './../actions/authedUser'
+import { handleSetAuthedUser } from './../actions/authedUser'
 import { LinkContainer } from "react-router-bootstrap"
 import { Link, withRouter } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ class NavComponent extends React.Component {
   handleLogout = (event) => {
     event.preventDefault()
     const { dispatch } = this.props
-    dispatch(setAuthedUser(null))
+    dispatch(handleSetAuthedUser(null))
   }
 
   render() {
@@ -43,7 +43,7 @@ class NavComponent extends React.Component {
           </div>}
           <Nav className="ml-auto">
             <Nav.Item>
-              {!!authedUser && <div>
+              {!!authedUser && !!Object.keys(users).length && <div>
                 <img
                   src={users[authedUser].avatarURL}
                   width="43"
