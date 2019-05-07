@@ -6,12 +6,12 @@ import './App.css';
 import LoginComponent from './components/login'
 import Container from 'react-bootstrap/Container'
 import NavComponent from './components/nav'
-import DashboardComponent from './components/dashboard'
+import DashboardComponent from './components/dashboard/dashboard'
 import AddQuestionComponent from './components/addQuestion'
-import LeaderBoardComponent from './components/leaderboard'
+import LeaderBoardComponent from './components/leaderboard/leaderboard'
 import { Redirect, Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
-import QuestionComponent from './components/question'
+import QuestionComponent from './components/question/question'
 import Page404Component from './components/404'
 
 class App extends React.Component{
