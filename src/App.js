@@ -6,10 +6,10 @@ import './App.css';
 import LoginComponent from './components/login'
 import Container from 'react-bootstrap/Container'
 import NavComponent from './components/nav'
-import HomeComponent from './components/dashboard'
+import DashboardComponent from './components/dashboard'
 import AddQuestionComponent from './components/addQuestion'
 import LeaderBoardComponent from './components/leaderboard'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
 import QuestionComponent from './components/question'
 import { handleSetAuthedUser } from './actions/authedUser';
@@ -46,7 +46,6 @@ class App extends React.Component{
   }
   render() {
     const { loading } = this.props
-    console.log("loading", loading)
     return (
       <Router>
         <Fragment>
@@ -57,8 +56,9 @@ class App extends React.Component{
               {
                 this.isLoggedIn() && <div>
                   <div>
-                    <Route path='/' exact component={HomeComponent} />
-                    <Route path='/dashboard' component={HomeComponent} />
+                    {/* Redirect required for bootstrap tab navigation highlighting, Dashboard at '/' would always be highlighted */}
+                    <Route path='/' exact render={() =>  <Redirect to="/dashboard"/>} />
+                    <Route path='/dashboard' exact component={DashboardComponent} />
                     <Route path='/add' component={AddQuestionComponent} />
                     <Route path='/leaderboard' component={LeaderBoardComponent} />
                     <Route path='/question/:id' component={() => <QuestionComponent isPoll={true} /> } />

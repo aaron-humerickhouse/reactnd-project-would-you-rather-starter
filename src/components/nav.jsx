@@ -13,6 +13,7 @@ class NavComponent extends React.Component {
     dispatch(handleSetAuthedUser(null))
   }
 
+
   render() {
     const { authedUser, users } = this.props
     return(
@@ -30,13 +31,13 @@ class NavComponent extends React.Component {
               activeKey={this.props.location.pathname}
             >
               <LinkContainer to="/dashboard">
-                <Nav.Link eventKey="/dashboard">Dashboard</Nav.Link>
+                <Nav.Link>Dashboard</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/add">
-                <Nav.Link eventKey="/add">Add Question</Nav.Link>
+                <Nav.Link>Add Question</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/leaderboard">
-                <Nav.Link eventKey="/leaderboard">Leaderboard</Nav.Link>
+                <Nav.Link>Leaderboard</Nav.Link>
               </LinkContainer>
               <hr style={{marginTop: "-0.5em"}}/>
             </Nav>

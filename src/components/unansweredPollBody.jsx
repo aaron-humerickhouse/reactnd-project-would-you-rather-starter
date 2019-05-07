@@ -11,9 +11,16 @@ class UnansweredPollBodyComponent extends React.Component {
   state = {
     option: null
   }
-  // componentDidMount = () => {
-  //   // If answered, redirect to answered
-  // }
+  componentWillMount = () => {
+    const {question, authedUser} = this.props
+
+    const optionOneVotes = question.optionOne.votes
+    const optionTwoVotes = question.optionTwo.votes
+
+    if(optionOneVotes.includes(authedUser) || optionTwoVotes.includes(authedUser)) {
+      this.props.history.push('/dashboard')
+    }
+  }
 
   handleSubmit = (event) => {
     event.preventDefault()
