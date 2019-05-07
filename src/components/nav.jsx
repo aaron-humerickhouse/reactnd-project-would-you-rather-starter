@@ -1,6 +1,5 @@
 import React from 'react'
 import Nav from 'react-bootstrap/Nav'
-import NavLink from 'react-bootstrap/NavLink'
 import Navbar from 'react-bootstrap/Navbar'
 import { connect } from 'react-redux'
 import { setAuthedUser } from './../actions/authedUser'
@@ -17,46 +16,53 @@ class NavComponent extends React.Component {
   render() {
     const { authedUser, users } = this.props
     return(
-      <div>
-        <Navbar collapseOnSelect expand="md">
-          <Link to="/">
-            <Navbar.Brand>
-              Would You Rather
-            </Navbar.Brand>
-          </Link>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+      <Navbar collapseOnSelect expand="md">
+        <Link to="/">
+          <Navbar.Brand>
+            Would You Rather
+          </Navbar.Brand>
+        </Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          {!!authedUser && <div>
             <Nav
               variant="tabs"
               activeKey={this.props.location.pathname}
             >
               <LinkContainer to="/dashboard">
-                <NavLink eventKey="/dashboard">Dashboard</NavLink>
+                <Nav.Link eventKey="/dashboard">Dashboard</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/add">
-                <NavLink eventKey="/add">Add Question</NavLink>
+                <Nav.Link eventKey="/add">Add Question</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/leaderboard">
-                <NavLink eventKey="/leaderboard">Leaderboard</NavLink>
+                <Nav.Link eventKey="/leaderboard">Leaderboard</Nav.Link>
               </LinkContainer>
+              <hr style={{marginTop: "-0.5em"}}/>
             </Nav>
-            <hr />
-            <Nav>
-              <Navbar.Text>
-              <img
+          </div>}
+          <Nav className="ml-auto">
+            <Nav.Item>
+              {!!authedUser && <div>
+                <img
                   src={users[authedUser].avatarURL}
-                  width="30"
-                  height="30"
+                  width="43"
+                  height="43"
                   alt={`${authedUser} avatar`}
                   className="circle"
                 />
-                { ` Welcome, ${authedUser}!`}
-              </Navbar.Text>
-              <NavLink href="#" onClick={this.handleLogout}>Logout</NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
+                <span>Welcome, {authedUser}!</span>
+              </div>}
+              {!authedUser && <span>
+                Please Sign In
+              </span>}
+            </Nav.Item>
+            {!!authedUser && <Nav.Link href="#" onClick={this.handleLogout}>
+              Logout
+            </Nav.Link>}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
   }
 }

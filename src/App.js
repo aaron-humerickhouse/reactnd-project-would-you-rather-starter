@@ -36,39 +36,43 @@ class App extends React.Component{
     document.head.appendChild(fontAwesome);
   }
   render() {
+    const { loading } = this.props
+    console.log("loading", loading)
     return (
       <Router>
         <Fragment>
           <LoadingBar />
-          <Container className="App">
-            {
-              this.isLoggedIn() && <div>
-                <NavComponent />
-                <div>
-                  <Route path='/' exact component={HomeComponent} />
-                  <Route path='/dashboard' component={HomeComponent} />
-                  <Route path='/add' component={AddQuestionComponent} />
-                  <Route path='/leaderboard' component={LeaderBoardComponent} />
-                  <Route path='/question/:id' component={() => <QuestionComponent isPoll={true} /> } />
+          <NavComponent />
+          {
+            loading === false && <Container className="App">
+              {
+                this.isLoggedIn() && <div>
+                  <div>
+                    <Route path='/' exact component={HomeComponent} />
+                    <Route path='/dashboard' component={HomeComponent} />
+                    <Route path='/add' component={AddQuestionComponent} />
+                    <Route path='/leaderboard' component={LeaderBoardComponent} />
+                    <Route path='/question/:id' component={() => <QuestionComponent isPoll={true} /> } />
+                  </div>
                 </div>
-              </div>
-            }
-            {
-              !this.isLoggedIn() &&<LoginComponent />
-            }
-          </Container>
+              }
+              {
+                !this.isLoggedIn() &&<LoginComponent />
+              }
+            </Container>
+          }
         </Fragment>
       </Router>
     );
   }
 }
 
-function mapStateToProps ({ authedUser, questions, users }) {
+function mapStateToProps({ authedUser, questions, users, payload }) {
   return {
-    loading: questions === null && users === null,
+    loading: !Object.keys(questions).length || !Object.keys(users).length,
     authedUser: authedUser,
     questions: questions,
-    users: users
+    users: users,
   }
 }
 

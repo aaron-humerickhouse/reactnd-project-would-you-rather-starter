@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../helpers'
-import { addQuestion } from '../actions/questions'
+import { handleAddQuestion } from '../actions/questions'
 
 class AddQuestionComponent extends React.Component {
   state = {
@@ -17,7 +17,13 @@ class AddQuestionComponent extends React.Component {
     const { authedUser, dispatch } = this.props
     const { optionOne, optionTwo } = this.state
 
-    dispatch(addQuestion(formatQuestion({optionOneText: optionOne, optionTwoText: optionTwo, author: authedUser})))
+    dispatch(handleAddQuestion(
+      formatQuestion({
+        optionOneText: optionOne,
+        optionTwoText: optionTwo,
+        author: authedUser
+      })
+    ))
     this.props.history.push('/dashboard')
   }
 

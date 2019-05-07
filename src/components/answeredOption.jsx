@@ -28,7 +28,7 @@ class AnsweredOptionComponent extends React.Component {
         <p style={{marginTop: '3em'}}>
           {option.text}
         </p>
-        <ProgressBar label={`${this.optionPercentage()}%`} now={this.optionPercentage()} />
+        <ProgressBar label={`${this.optionPercentage().toFixed(2)}%`} now={this.optionPercentage()} />
         <p style={{marginBottom: '3em'}}>{option.votes.length} out of {totalVotes} votes</p>
       </div>
     )
