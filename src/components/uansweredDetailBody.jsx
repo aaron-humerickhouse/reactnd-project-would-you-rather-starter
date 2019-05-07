@@ -7,21 +7,10 @@ import {connect} from 'react-redux'
 import { handleAnswerQuestion } from '../actions/questions';
 import { withRouter } from 'react-router-dom'
 
-class UnansweredPollBodyComponent extends React.Component {
+class UnansweredDetailBodyComponent extends React.Component {
   state = {
     option: null
   }
-  componentWillMount = () => {
-    const {question, authedUser} = this.props
-
-    const optionOneVotes = question.optionOne.votes
-    const optionTwoVotes = question.optionTwo.votes
-
-    if(optionOneVotes.includes(authedUser) || optionTwoVotes.includes(authedUser)) {
-      this.props.history.push('/dashboard')
-    }
-  }
-
   handleSubmit = (event) => {
     event.preventDefault()
 
@@ -94,4 +83,4 @@ function mapStateToProps({authedUser}) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(UnansweredPollBodyComponent))
+export default withRouter(connect(mapStateToProps)(UnansweredDetailBodyComponent))

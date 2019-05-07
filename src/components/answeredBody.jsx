@@ -1,5 +1,8 @@
 import React from 'react'
 import AnsweredOptionComponent from './answeredOption'
+import Button from 'react-bootstrap/Button'
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class AnsweredBodyComponent extends React.Component {
   totalVotes = () => {
@@ -7,6 +10,11 @@ class AnsweredBodyComponent extends React.Component {
     return question.optionOne.votes.length + question.optionTwo.votes.length
   }
 
+  handleNavigation = (event) => {
+    event.preventDefault()
+    const { question } = this.props
+    this.props.history.push(`/question/${question.id}`)
+  }
 
   render() {
     const { question } = this.props
@@ -22,9 +30,11 @@ class AnsweredBodyComponent extends React.Component {
           option={question.optionTwo}
           totalVotes={this.totalVotes()}
         />
+        <Button variant="outline-primary" onClick={this.handleNavigation}>View Details</Button>
      </div>
     )
   }
 }
 
-export default AnsweredBodyComponent
+
+export default withRouter(connect()(AnsweredBodyComponent))

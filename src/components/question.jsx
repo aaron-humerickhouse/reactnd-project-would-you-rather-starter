@@ -6,13 +6,18 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import UnansweredBodyComponent from './unansweredBody';
 import AnsweredBodyComponent from './answeredBody';
-import UnansweredPollBodyComponent from './unansweredPollBody';
+import DetailQuestionBodyComponent from './detailBody';
 
 class QuestionComponent extends React.Component {
-
+  componentDidMount() {
+    const {question, history} = this.props
+    if(!question) {
+      history.push('/404')
+    }
+  }
 
   render() {
-    const { avatarURL, authorName, question, showUnanswered, isPoll } = this.props
+    const { avatarURL, authorName, question, showUnanswered, isDetail } = this.props
 
     return(
       <Card className="question">
@@ -29,9 +34,9 @@ class QuestionComponent extends React.Component {
               </Row>
             </Col>
             <Col xs={8}>
-              { showUnanswered && !isPoll && <UnansweredBodyComponent question={question}/>}
-              { !showUnanswered && !isPoll && <AnsweredBodyComponent question={question}/>}
-              {isPoll && <UnansweredPollBodyComponent question={question}/>}
+              { showUnanswered && !isDetail && <UnansweredBodyComponent question={question}/>}
+              { !showUnanswered && !isDetail && <AnsweredBodyComponent question={question}/>}
+              {isDetail && <DetailQuestionBodyComponent question={question}/>}
             </Col>
           </Row>
         </Card.Body>

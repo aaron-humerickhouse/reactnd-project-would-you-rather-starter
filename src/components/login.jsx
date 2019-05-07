@@ -18,7 +18,6 @@ class LoginComponent extends React.Component {
     event.preventDefault()
     const { dispatch } = this.props
     dispatch(setAuthedUser(this.state.selectedUser)) //TODO: change to handle and set local storage to keep authedUser
-    this.props.history.push('/dashboard')
   }
 
   handleChange = (event) => {

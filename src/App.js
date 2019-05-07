@@ -9,10 +9,10 @@ import NavComponent from './components/nav'
 import DashboardComponent from './components/dashboard'
 import AddQuestionComponent from './components/addQuestion'
 import LeaderBoardComponent from './components/leaderboard'
-import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom'
+import { Redirect, Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
 import QuestionComponent from './components/question'
-
+import Page404Component from './components/404'
 
 class App extends React.Component{
   isLoggedIn = () => {
@@ -46,14 +46,16 @@ class App extends React.Component{
             loading === false && <Container className="App">
               {
                 this.isLoggedIn() && <div>
-                  <div>
+                  <Switch>
                     {/* Redirect required for bootstrap tab navigation highlighting, Dashboard at '/' would always be highlighted */}
                     <Route path='/' exact render={() =>  <Redirect to="/dashboard"/>} />
                     <Route path='/dashboard' exact component={DashboardComponent} />
                     <Route path='/add' component={AddQuestionComponent} />
                     <Route path='/leaderboard' component={LeaderBoardComponent} />
-                    <Route path='/question/:id' component={() => <QuestionComponent isPoll={true} /> } />
-                  </div>
+                    <Route path='/question/:id' component={() => <QuestionComponent isDetail={true} /> } />
+                    <Route path='/404' component={Page404Component} />
+                    <Route component={Page404Component} />
+                  </Switch>
                 </div>
               }
               {
