@@ -12,7 +12,6 @@ import LeaderBoardComponent from './components/leaderboard'
 import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom'
 import { handleInitialData } from './actions/shared'
 import QuestionComponent from './components/question'
-import { handleSetAuthedUser } from './actions/authedUser';
 
 
 class App extends React.Component{
@@ -35,14 +34,6 @@ class App extends React.Component{
 
     this.props.dispatch(handleInitialData())
 
-    const { authedUser, dispatch } = this.props
-
-    if(!authedUser) {
-      const storedUser = localStorage.getItem('authedUser')
-      if(!!storedUser) {
-        dispatch(handleSetAuthedUser(storedUser))
-      }
-    }
   }
   render() {
     const { loading } = this.props

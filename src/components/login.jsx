@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
-import { handleSetAuthedUser } from './../actions/authedUser'
+import { setAuthedUser } from './../actions/authedUser'
 import { withRouter } from 'react-router-dom'
 
 
@@ -17,7 +17,7 @@ class LoginComponent extends React.Component {
   handleLogin = (event) => {
     event.preventDefault()
     const { dispatch } = this.props
-    dispatch(handleSetAuthedUser(this.state.selectedUser)) //TODO: change to handle and set local storage to keep authedUser
+    dispatch(setAuthedUser(this.state.selectedUser)) //TODO: change to handle and set local storage to keep authedUser
     this.props.history.push('/dashboard')
   }
 
