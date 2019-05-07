@@ -37,13 +37,21 @@ class QuestionListComponent extends React.Component {
 }
 
 function mapStateToProps({questions, users, authedUser}, {showUnanswered}) {
-
+  // Messy, but it works
   const answeredQuestions = Object.keys(users[authedUser]['answers'])
   const unansweredQuestions = Object.keys(questions).filter(question => !answeredQuestions.includes(question))
 
+  const sortedAnsweredQuestions = Object.values(answeredQuestions.map(qid => {
+    return questions[qid]
+  })).sort((a,b) => b.timestamp - a.timestamp).map(question => question.id)
+
+  const sortedUnansweredQuestions = Object.values(unansweredQuestions.map(qid => {
+    return questions[qid]
+  })).sort((a,b) => b.timestamp - a.timestamp).map(question => question.id)
+
   return {
     showUnanswered: showUnanswered,
-    questions: showUnanswered ? unansweredQuestions.sort() : answeredQuestions.sort()
+    questions: showUnanswered ? sortedUnansweredQuestions : sortedAnsweredQuestions
   }
 }
 
