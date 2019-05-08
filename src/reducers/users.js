@@ -39,7 +39,7 @@ export default function users(state = {}, action) {
 }
 
 function removeQuestion(answers, question) {
-  const answersCopy = Object.assign({}, answers);
-  delete answers[question.id];
+  let answersCopy = Object.assign({}, answers);
+  delete answersCopy[question.id];
   return answersCopy;
 }

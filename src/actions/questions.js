@@ -22,8 +22,13 @@ function addQuestion(question) {
 }
 
 export function handleAddQuestion(question) {
-  return dispatch => saveQuestion(question)
-    .then(() => dispatch(addQuestion(question)));
+  return (dispatch) => {
+    dispatch(showLoading());
+
+    return saveQuestion(question)
+      .then(() => dispatch(addQuestion(question)))
+      .then(() => dispatch(hideLoading()));
+  }
 }
 
 function answerQuestion(question, option, authedUser) {
