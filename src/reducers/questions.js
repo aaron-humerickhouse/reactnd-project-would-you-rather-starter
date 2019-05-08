@@ -1,8 +1,8 @@
-import { GET_QUESTIONS, ADD_QUESTION, ANSWER_QUESTION } from '../actions/questions'
+import { GET_QUESTIONS, ADD_QUESTION, ANSWER_QUESTION, REMOVE_ANSWER_QUESTION } from '../actions/questions'
 
 export default function questions(state = {}, action) {
   switch(action.type) {
-    case GET_QUESTIONS :
+    case GET_QUESTIONS:
       return {
         ...state,
         ...action.questions
@@ -29,7 +29,21 @@ export default function questions(state = {}, action) {
         }
       }
     }
-    default :
+    case REMOVE_ANSWER_QUESTION: {
+      const {question, option, authedUser} = action
+
+      return {
+        ...state,
+        [question.id]: {
+          ...question,
+          [option]: {
+            ...question[option],
+            votes: state[question.id][option]['votes'].filter(user => user !== authedUser)
+          }
+        }
+      }
+    }
+    default:
       return state
   }
 }
