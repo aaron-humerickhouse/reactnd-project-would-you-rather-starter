@@ -1,5 +1,5 @@
 import React from 'react'
-import QuestionComponent from './../question/question.jsx'
+import QuestionComponent from './../question/question'
 import {connect} from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'

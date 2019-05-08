@@ -5,6 +5,9 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 class AnsweredBodyComponent extends React.Component {
+  componentDidMount() {
+
+  }
   totalVotes = () => {
     const { question } = this.props
     return question.optionOne.votes.length + question.optionTwo.votes.length
