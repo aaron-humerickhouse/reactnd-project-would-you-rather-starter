@@ -1,22 +1,24 @@
-import { GET_QUESTIONS, ADD_QUESTION, ANSWER_QUESTION, REMOVE_ANSWER_QUESTION } from '../actions/questions'
+import {
+  GET_QUESTIONS, ADD_QUESTION, ANSWER_QUESTION, REMOVE_ANSWER_QUESTION,
+} from '../actions/questions';
 
 export default function questions(state = {}, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_QUESTIONS:
       return {
         ...state,
-        ...action.questions
-      }
+        ...action.questions,
+      };
     case ADD_QUESTION: {
-      const {question} = action
+      const { question } = action;
 
       return {
         ...state,
-        [question.id]: question
-      }
+        [question.id]: question,
+      };
     }
     case ANSWER_QUESTION: {
-      const {question, option, authedUser} = action
+      const { question, option, authedUser } = action;
 
       return {
         ...state,
@@ -24,13 +26,13 @@ export default function questions(state = {}, action) {
           ...question,
           [option]: {
             ...question[option],
-            votes: state[question.id][option]['votes'].concat(authedUser)
-          }
-        }
-      }
+            votes: state[question.id][option].votes.concat(authedUser),
+          },
+        },
+      };
     }
     case REMOVE_ANSWER_QUESTION: {
-      const {question, option, authedUser} = action
+      const { question, option, authedUser } = action;
 
       return {
         ...state,
@@ -38,12 +40,12 @@ export default function questions(state = {}, action) {
           ...question,
           [option]: {
             ...question[option],
-            votes: state[question.id][option]['votes'].filter(user => user !== authedUser)
-          }
-        }
-      }
+            votes: state[question.id][option].votes.filter(user => user !== authedUser),
+          },
+        },
+      };
     }
     default:
-      return state
+      return state;
   }
 }

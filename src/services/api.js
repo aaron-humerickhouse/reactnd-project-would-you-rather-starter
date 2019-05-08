@@ -3,23 +3,23 @@ import {
   _getQuestions,
   _saveQuestionAnswer,
   _saveQuestion,
-} from './_DATA.js'
+} from './_DATA.js';
 
-export function getInitialData () {
+export function getInitialData() {
   return Promise.all([
     _getUsers(),
     _getQuestions(),
   ]).then(([users, questions]) => ({
-    users: users,
-    questions: questions,
-    authedUser: null
-  }))
+    users,
+    questions,
+    authedUser: null,
+  }));
 }
 
 export function saveQuestion(question) {
-  return _saveQuestion(question)
+  return _saveQuestion(question);
 }
 
 export function saveQuestionAnswer({ authedUser, qid, answer }) {
-  return _saveQuestionAnswer({ authedUser, qid, answer })
+  return _saveQuestionAnswer({ authedUser, qid, answer });
 }

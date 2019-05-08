@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 class OptionComponent extends React.Component {
   render() {
-    const { option } = this.props
-    return(
+    const { option } = this.props;
+    return (
       <p>{option.text}</p>
-    )
+    );
   }
 }
 
-export default OptionComponent
+export default OptionComponent;
